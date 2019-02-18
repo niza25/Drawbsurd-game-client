@@ -1,21 +1,33 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getGames, joinGame, updateGame } from '../../actions/games'
+import { getGames, joinGame, updateGame, saveAnswer } from '../../actions/games'
 import { getUsers } from '../../actions/users'
 import { userId } from '../../jwt'
 import Paper from '@material-ui/core/Paper'
 import Board from './Board'
 import './GameDetails.css'
 import CanvasToDraw from './canvas'
+import Phrase from './InputPhraseBox/Phrase'
+import Input from './InputPhraseBox/Input'
+
+const phrases = ['duck robs a bank', 'to be on top of the world', 'cat smokes a cigar', 'to have a snake in pocket', 'monkey having a BBQ', 'wild programmer'];
 
 class GameDetails extends PureComponent {
+
+  state = {
+    answer: '',
+    phrase: ''
+  }
 
   componentWillMount() {
     if (this.props.authenticated) {
       if (this.props.game === null) this.props.getGames()
       if (this.props.users === null) this.props.getUsers()
     }
+    this.setState({
+      phrase: phrases[Math.floor(Math.random() * phrases.length)]
+    })
   }
 
   joinGame = () => this.props.joinGame(this.props.game.id)
@@ -32,7 +44,24 @@ class GameDetails extends PureComponent {
     updateGame(game.id, board)
   }
 
+  // Iza added, add logic when done drawing
+  onDoneHandler = () => {
 
+  }
+
+  onChange = (event) => {
+    this.setState({
+      answer: event.target.value
+    })
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault()
+    this.props.saveAnswer(this.state)
+    this.setState({
+      answer: ''
+    })
+  }
 
   render() {
     const { game, users, authenticated, userId } = this.props
@@ -52,25 +81,26 @@ class GameDetails extends PureComponent {
 
     return (
       <Paper className="outer-paper">
-        <h1>Game #{game.id}</h1>
+        <h1>Drawbsurd #{game.id}</h1>
 
-        <p>Status: {game.status}</p>
+        <p>Your drawbsurd is {game.status}</p>
 
         {
           game.status === 'started' &&
-          player && player.symbol === game.turn &&
-          <div>It's your turn!</div>
+          player && player.turn === game.turn &&
+          <div>You should be drawing! Find your phrase below</div>
+        }
+
+        {
+          game.status === 'started' &&
+          player && player.turn !== game.turn &&
+          <div>You should be guessing! Type your guess below</div>
         }
 
         {
           game.status === 'pending' &&
           game.players.map(p => p.userId).indexOf(userId) === -1 &&
-          <button onClick={this.joinGame}>Join Game</button>
-        }
-
-        {
-          winner &&
-          <p>Winner: {users[winner].firstName}</p>
+          <button onClick={this.joinGame}>Join this drawbsurd</button>
         }
 
         <hr />
@@ -79,7 +109,21 @@ class GameDetails extends PureComponent {
           game.status !== 'pending' &&
           //<Board board={game.board} makeMove={this.makeMove} />
           <CanvasToDraw />
-      }
+        }
+        {
+          game.status === 'started' &&
+          player && player.turn === game.turn &&
+          <Phrase onDoneHandler={this.onDoneHandler}
+            phrase={this.state.phrase} />
+        }
+
+        {
+          game.status === 'started' &&
+          player && player.turn !== game.turn &&
+          <Input onChange={this.onChange}
+            answer={this.state.answer}
+            onSubmit={this.onSubmit} />
+        }
       </Paper>)
   }
 }
@@ -92,7 +136,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGame
+  getGames, getUsers, joinGame, updateGame, saveAnswer
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
