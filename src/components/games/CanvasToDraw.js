@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import CanvasDraw from "react-canvas-draw";
+import { updateCanvas } from '../../actions/games'
+import { connect } from 'react-redux'
 
-export default class CanvasToDraw extends React.Component {
+class CanvasToDraw extends PureComponent {
 
   state = {
     color: "#ffc600",
@@ -11,18 +13,40 @@ export default class CanvasToDraw extends React.Component {
     lazyRadius: 5
   }
 
+  saveDrawing = () => {
+    localStorage.setItem(
+      "savedDrawing",
+      this.saveableCanvas.getSaveData()
+    );
+
+    const { game, updateCanvas } = this.props
+
+    const canvas = localStorage.getItem("savedDrawing")
+    ;
+    
+    updateCanvas(game.id, canvas)
+    console.log(game.id + canvas)
+  }
+
+  // // saveDrawing = () => {
+  // //   localStorage.setItem(
+  // //     "savedDrawing",
+  // //     this.saveableCanvas.getSaveData()
+  // //   );
+  // }
+
+
   render() {
+    // console.log(this.saveableCanvas.getSaveData() + 'this.saveableCanvas')
+    // console.log(localStorage.getItem("savedDrawing"))
+    // console.log(this.props.game.canvas + 'canvasDisplay')
+
 
     return (
       <div>
         <div>
           <button
-            onClick={() => {
-              localStorage.setItem(
-                "savedDrawing",
-                this.saveableCanvas.getSaveData()
-              );
-            }}
+            onClick={this.saveDrawing}
           >
             Save
           </button>
@@ -91,9 +115,20 @@ export default class CanvasToDraw extends React.Component {
             canvasHeight={this.state.height}
           />
         </div>
+        
       </div>
     )
 
   }
 
 }
+
+const mapStateToProps = (state, props) => ({
+  game: state.games && state.games[props.gameId],
+})
+
+const mapDispatchToProps = {
+  updateCanvas
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CanvasToDraw)

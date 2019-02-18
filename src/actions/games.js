@@ -23,6 +23,8 @@ const updateGameSuccess = () => ({
   type: UPDATE_GAME_SUCCESS
 })
 
+
+
 const joinGameSuccess = () => ({
   type: JOIN_GAME_SUCCESS
 })
@@ -78,6 +80,20 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
     .patch(`${baseUrl}/games/${gameId}`)
     .set('Authorization', `Bearer ${jwt}`)
     .send({ board })
+    .then(_ => dispatch(updateGameSuccess()))
+    .catch(err => console.error(err))
+}
+
+export const updateCanvas = (gameId, canvas) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .patch(`${baseUrl}/games/${gameId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send({ canvas })
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
