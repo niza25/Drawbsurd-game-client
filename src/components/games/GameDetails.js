@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import Board from './Board'
 import './GameDetails.css'
 import CanvasToDraw from './canvas'
+import Phrase from './InputPhraseBox/Phrase'
 
 class GameDetails extends PureComponent {
 
@@ -32,6 +33,11 @@ class GameDetails extends PureComponent {
     updateGame(game.id, board)
   }
 
+  // Iza added, add logic when done drawing
+  onDoneHandler = () => {
+
+  }
+
 
 
   render() {
@@ -52,20 +58,26 @@ class GameDetails extends PureComponent {
 
     return (
       <Paper className="outer-paper">
-        <h1>Game #{game.id}</h1>
+        <h1>Drawbsurd #{game.id}</h1>
 
-        <p>Status: {game.status}</p>
+        <p>Your drawbsurd is {game.status}</p>
 
         {
           game.status === 'started' &&
-          player && player.symbol === game.turn &&
-          <div>It's your turn!</div>
+          player && player.turn === game.turn &&
+          <div>You should be drawing! Find your phrase below</div>
+        }
+
+        {
+          game.status === 'started' &&
+          player && player.turn !== game.turn &&
+          <div>You should be guessing! Type your guess below</div>
         }
 
         {
           game.status === 'pending' &&
           game.players.map(p => p.userId).indexOf(userId) === -1 &&
-          <button onClick={this.joinGame}>Join Game</button>
+          <button onClick={this.joinGame}>Join this drawbsurd</button>
         }
 
         {
@@ -79,7 +91,12 @@ class GameDetails extends PureComponent {
           game.status !== 'pending' &&
           //<Board board={game.board} makeMove={this.makeMove} />
           <CanvasToDraw />
-      }
+        }
+        {
+          game.status === 'started' &&
+          player && player.turn === game.turn &&
+          <Phrase onDoneHandler={this.props.onDoneHandler} />
+        }
       </Paper>)
   }
 }
