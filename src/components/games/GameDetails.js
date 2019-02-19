@@ -47,7 +47,6 @@ class GameDetails extends PureComponent {
     updateGame(game.id, board)
   }
 
-  // Iza added, add logic when done drawing
   onDoneHandler = () => {
 
   }
@@ -83,7 +82,7 @@ class GameDetails extends PureComponent {
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
-      
+
 
     return (
       <Paper className="outer-paper">
@@ -115,15 +114,14 @@ class GameDetails extends PureComponent {
           game.status !== 'pending' && player.turn === game.turn &&
           //<Board board={game.board} makeMove={this.makeMove} />
 
-          <CanvasToDraw gameId={this.props.match.params.id}/>
-      }
-
-{
-          game.status !== 'pending' && player.turn !== game.turn &&
-          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas}/>
-      }
-        
+          <CanvasToDraw gameId={this.props.match.params.id} />
         }
+
+        {
+          game.status !== 'pending' && player.turn !== game.turn &&
+          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
+        }
+
         {
           game.status === 'started' &&
           player && player.turn === game.turn &&
