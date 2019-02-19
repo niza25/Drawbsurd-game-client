@@ -13,6 +13,8 @@ class CanvasToDraw extends PureComponent {
     lazyRadius: 5
   }
 
+  
+
   saveDrawing = () => {
     localStorage.setItem(
       "savedDrawing",
@@ -28,6 +30,7 @@ class CanvasToDraw extends PureComponent {
     console.log(game.id + canvas)
   }
 
+
   // // saveDrawing = () => {
   // //   localStorage.setItem(
   // //     "savedDrawing",
@@ -40,7 +43,7 @@ class CanvasToDraw extends PureComponent {
     // console.log(this.saveableCanvas.getSaveData() + 'this.saveableCanvas')
     // console.log(localStorage.getItem("savedDrawing"))
     // console.log(this.props.game.canvas + 'canvasDisplay')
-
+    document.addEventListener("click", this.saveDrawing);
 
     return (
       <div>
