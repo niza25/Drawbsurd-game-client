@@ -93,7 +93,7 @@ export const updateCanvas = (gameId, canvas) => (dispatch, getState) => {
   request
     .patch(`${baseUrl}/games/${gameId}`)
     .set('Authorization', `Bearer ${jwt}`)
-    .send({ canvas })
+    .send({canvas})
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
