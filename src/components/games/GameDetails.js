@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getGames, joinGame, saveAnswer } from '../../actions/games'
+import { getGames, joinGame, updateGameData } from '../../actions/games'
 import { getUsers } from '../../actions/users'
 import { userId } from '../../jwt'
 import Paper from '@material-ui/core/Paper'
@@ -59,7 +59,7 @@ class GameDetails extends PureComponent {
 
   onSubmit = (event) => {
     event.preventDefault()
-    this.props.saveAnswer(this.state)
+    this.props.updateGameData(this.props.game.id, this.state.answer)
     this.setState({
       answer: ''
     })
@@ -78,9 +78,6 @@ class GameDetails extends PureComponent {
 
     
     const player = game.players.find(p => p.userId === userId)
-
-    console.log(game.players)
-    console.log(userId)
 
     return (
       <Paper className="outer-paper">
@@ -117,14 +114,15 @@ class GameDetails extends PureComponent {
 
         {
           game.status !== 'pending' && player.turn !== game.turn &&
-          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
+          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas.data} />
         }
 
         {
           game.status === 'started' &&
           player && player.turn === game.turn &&
           <Phrase onDoneHandler={this.onDoneHandler}
-            phrase={this.state.phrase} />
+            phrase={this.state.phrase} 
+            answer = {this.props.game.answer}/>
         }
 
         {
@@ -146,7 +144,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, saveAnswer
+  getGames, getUsers, joinGame, updateGameData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)

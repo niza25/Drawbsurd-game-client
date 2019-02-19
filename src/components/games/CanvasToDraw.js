@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import CanvasDraw from "react-canvas-draw";
-import { updateCanvas } from '../../actions/games'
+import { updateGameData } from '../../actions/games'
 import { connect } from 'react-redux'
 
 class CanvasToDraw extends PureComponent {
@@ -19,12 +19,12 @@ class CanvasToDraw extends PureComponent {
       this.saveableCanvas.getSaveData()
     );
 
-    const { game, updateCanvas } = this.props
+    const { game, updateGameData } = this.props
 
     const canvas = localStorage.getItem("savedDrawing")
     ;
     
-    updateCanvas(game.id, canvas)
+    updateGameData(game.id, canvas)
     console.log(game.id + canvas)
   }
 
@@ -128,7 +128,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  updateCanvas
+  updateGameData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CanvasToDraw)
