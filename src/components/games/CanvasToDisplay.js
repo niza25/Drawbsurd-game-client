@@ -5,7 +5,7 @@ import CanvasDraw from "react-canvas-draw"
 export default class CanvasToDisplay extends PureComponent {
 
     render() {
-        if (!this.props.canvasDisplay) return 'Loading...'
+        if (!this.props.canvasDisplay) return 'Waiting for the drawing...'
 
         return (
             <div>

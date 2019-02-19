@@ -16,9 +16,11 @@ class CanvasToDraw extends PureComponent {
   
 
   saveDrawing = () => {
+    console.log(this.saveableCanvas)
     localStorage.setItem(
       "savedDrawing",
       this.saveableCanvas.getSaveData()
+      
     );
 
     const { game, updateGameData } = this.props
@@ -27,7 +29,6 @@ class CanvasToDraw extends PureComponent {
     ;
     
     updateGameData(game.id, canvas)
-    console.log(game.id + canvas)
   }
 
 
