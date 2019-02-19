@@ -8,7 +8,7 @@ class CanvasToDraw extends PureComponent {
   state = {
     color: "#ffc600",
     width: 800,
-    height: 800,
+    height: 500,
     brushRadius: 4,
     lazyRadius: 5
   }

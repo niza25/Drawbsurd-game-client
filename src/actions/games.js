@@ -8,6 +8,7 @@ export const UPDATE_GAME = 'UPDATE_GAME'
 export const UPDATE_GAMES = 'UPDATE_GAMES'
 export const JOIN_GAME_SUCCESS = 'JOIN_GAME_SUCCESS'
 export const UPDATE_GAME_SUCCESS = 'UPDATE_GAME_SUCCESS'
+export const SAVE_ANSWER = 'SAVE_ANSWER'
 
 const updateGames = games => ({
   type: UPDATE_GAMES,
@@ -97,3 +98,8 @@ export const updateCanvas = (gameId, canvas) => (dispatch, getState) => {
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
+// Iza added
+export const saveAnswer = answer => ({
+  type: SAVE_ANSWER,
+  payload: answer
+})
