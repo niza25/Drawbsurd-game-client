@@ -6,8 +6,6 @@ export default class CanvasToDisplay extends PureComponent {
 
     render() {
         if (!this.props.canvasDisplay) return 'Loading...'
-        // console.log(JSON.stringify(this.props.canvasDisplay))
-
 
         return (
             <div>
@@ -15,7 +13,7 @@ export default class CanvasToDisplay extends PureComponent {
                     disabled
                     hideGrid
                     ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
-                    saveData={this.props.canvasDisplay.canvas}
+                    saveData={this.props.canvasDisplay}
                 />
             </div>
 

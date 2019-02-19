@@ -73,7 +73,7 @@ export const createGame = () => (dispatch, getState) => {
 
 
 
-export const updateCanvas = (gameId, canvas) => (dispatch, getState) => {
+export const updateGameData = (gameId, data) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
@@ -82,12 +82,22 @@ export const updateCanvas = (gameId, canvas) => (dispatch, getState) => {
   request
     .patch(`${baseUrl}/games/${gameId}`)
     .set('Authorization', `Bearer ${jwt}`)
-    .send({canvas})
+    .send({data})
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
-// Iza added
-export const saveAnswer = answer => ({
-  type: SAVE_ANSWER,
-  payload: answer
-})
+
+/* export const saveAnswer = (gameId, answer) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .patch(`${baseUrl}/games/${gameId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send({answer})
+    .then(_ => dispatch(updateGameSuccess()))
+    .catch(err => console.error(err))
+}
+ */
