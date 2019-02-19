@@ -64,7 +64,7 @@ class GameDetails extends PureComponent {
     if (game === null || users === null) return 'Loading...'
     if (!game) return 'Not found'
 
-    
+
     const player = game.players.find(p => p.userId === userId)
 
     return (
@@ -100,15 +100,15 @@ class GameDetails extends PureComponent {
 
         {
           game.status !== 'pending' && player.turn !== game.turn &&
-          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas.data} />
+          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
         }
 
         {
           game.status === 'started' &&
           player && player.turn === game.turn &&
           <Phrase onDoneHandler={this.onDoneHandler}
-            phrase={this.state.phrase} 
-            answer = {this.props.game.answer}/>
+            phrase={this.state.phrase}
+            answer={this.props.game.answer} />
         }
 
         {
