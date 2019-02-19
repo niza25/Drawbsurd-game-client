@@ -35,18 +35,6 @@ class GameDetails extends PureComponent {
 
   joinGame = () => this.props.joinGame(this.props.game.id)
 
-  // makeMove = (toRow, toCell) => {
-  //   const { game, updateGame } = this.props
-
-  //   const board = game.board.map(
-  //     (row, rowIndex) => row.map((cell, cellIndex) => {
-  //       if (rowIndex === toRow && cellIndex === toCell) return game.turn
-  //       else return cell
-  //     })
-  //   )
-  //   updateGame(game.id, board)
-  // }
-
   onDoneHandler = () => {
 
   }
@@ -107,8 +95,6 @@ class GameDetails extends PureComponent {
 
         {
           game.status !== 'pending' && player.turn === game.turn &&
-          //<Board board={game.board} makeMove={this.makeMove} />
-
           <CanvasToDraw gameId={this.props.match.params.id} />
         }
 
