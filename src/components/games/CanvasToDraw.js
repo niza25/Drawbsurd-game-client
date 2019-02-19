@@ -22,27 +22,12 @@ class CanvasToDraw extends PureComponent {
     );
 
     const { game, updateGameData } = this.props
-
-    const canvas = localStorage.getItem("savedDrawing")
-    ;
+    const canvas = localStorage.getItem("savedDrawing");
     
     updateGameData(game.id, canvas)
-    console.log(game.id + canvas)
   }
 
-
-  // // saveDrawing = () => {
-  // //   localStorage.setItem(
-  // //     "savedDrawing",
-  // //     this.saveableCanvas.getSaveData()
-  // //   );
-  // }
-
-
   render() {
-    // console.log(this.saveableCanvas.getSaveData() + 'this.saveableCanvas')
-    // console.log(localStorage.getItem("savedDrawing"))
-    // console.log(this.props.game.canvas + 'canvasDisplay')
     document.addEventListener("click", this.saveDrawing);
 
     return (

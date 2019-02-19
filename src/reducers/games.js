@@ -1,4 +1,4 @@
-import {ADD_GAME, UPDATE_GAME, UPDATE_GAMES, SAVE_ANSWER} from '../actions/games'
+import {ADD_GAME, UPDATE_GAME, UPDATE_GAMES} from '../actions/games'
 import {USER_LOGOUT} from '../actions/users'
 
 /*
@@ -20,12 +20,6 @@ export default (state = null, {type, payload}) => {
       return {
         ...state,
         [payload.id]: payload
-      }
-
-      case SAVE_ANSWER:
-      return {
-        ...state,
-        currentAnswer: payload
       }
 
     case UPDATE_GAMES:
