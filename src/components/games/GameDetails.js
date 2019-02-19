@@ -5,13 +5,16 @@ import { getGames, joinGame, updateGame, saveAnswer } from '../../actions/games'
 import { getUsers } from '../../actions/users'
 import { userId } from '../../jwt'
 import Paper from '@material-ui/core/Paper'
-import Board from './Board'
+// import Board from './Board'
 import './GameDetails.css'
-import CanvasToDraw from './canvas'
+import CanvasToDraw from './CanvasToDraw'
+import CanvasToDisplay from './CanvasToDisplay'
+
 import Phrase from './InputPhraseBox/Phrase'
 import Input from './InputPhraseBox/Input'
 
 const phrases = ['duck robs a bank', 'to be on top of the world', 'cat smokes a cigar', 'to have a snake in pocket', 'monkey having a BBQ', 'wild programmer'];
+
 
 class GameDetails extends PureComponent {
 
@@ -64,6 +67,7 @@ class GameDetails extends PureComponent {
   }
 
   render() {
+
     const { game, users, authenticated, userId } = this.props
 
     if (!authenticated) return (
@@ -73,11 +77,13 @@ class GameDetails extends PureComponent {
     if (game === null || users === null) return 'Loading...'
     if (!game) return 'Not found'
 
+    console.log(game.canvas)
     const player = game.players.find(p => p.userId === userId)
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
+      
 
     return (
       <Paper className="outer-paper">
@@ -106,9 +112,17 @@ class GameDetails extends PureComponent {
         <hr />
 
         {
-          game.status !== 'pending' &&
+          game.status !== 'pending' && player.turn === game.turn &&
           //<Board board={game.board} makeMove={this.makeMove} />
-          <CanvasToDraw />
+
+          <CanvasToDraw gameId={this.props.match.params.id}/>
+      }
+
+{
+          game.status !== 'pending' && player.turn !== game.turn &&
+          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas}/>
+      }
+        
         }
         {
           game.status === 'started' &&
