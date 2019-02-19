@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getGames, joinGame, updateGame, saveAnswer } from '../../actions/games'
+import { getGames, joinGame, saveAnswer } from '../../actions/games'
 import { getUsers } from '../../actions/users'
 import { userId } from '../../jwt'
 import Paper from '@material-ui/core/Paper'
@@ -35,17 +35,17 @@ class GameDetails extends PureComponent {
 
   joinGame = () => this.props.joinGame(this.props.game.id)
 
-  makeMove = (toRow, toCell) => {
-    const { game, updateGame } = this.props
+  // makeMove = (toRow, toCell) => {
+  //   const { game, updateGame } = this.props
 
-    const board = game.board.map(
-      (row, rowIndex) => row.map((cell, cellIndex) => {
-        if (rowIndex === toRow && cellIndex === toCell) return game.turn
-        else return cell
-      })
-    )
-    updateGame(game.id, board)
-  }
+  //   const board = game.board.map(
+  //     (row, rowIndex) => row.map((cell, cellIndex) => {
+  //       if (rowIndex === toRow && cellIndex === toCell) return game.turn
+  //       else return cell
+  //     })
+  //   )
+  //   updateGame(game.id, board)
+  // }
 
   onDoneHandler = () => {
 
@@ -76,13 +76,11 @@ class GameDetails extends PureComponent {
     if (game === null || users === null) return 'Loading...'
     if (!game) return 'Not found'
 
-    console.log(game.canvas)
+    
     const player = game.players.find(p => p.userId === userId)
 
-    const winner = game.players
-      .filter(p => p.symbol === game.winner)
-      .map(p => p.userId)[0]
-
+    console.log(game.players)
+    console.log(userId)
 
     return (
       <Paper className="outer-paper">
@@ -148,7 +146,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGame, saveAnswer
+  getGames, getUsers, joinGame, saveAnswer
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
