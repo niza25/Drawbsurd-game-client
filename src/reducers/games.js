@@ -16,7 +16,7 @@ export default (state = null, {type, payload}) => {
         [payload.id]: payload
       }
 
-    case UPDATE_GAME:
+    case UPDATE_GAME: 
       return {
         ...state,
         [payload.id]: payload

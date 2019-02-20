@@ -27,7 +27,6 @@ const joinGameSuccess = () => ({
   type: JOIN_GAME_SUCCESS
 })
 
-
 export const getGames = () => (dispatch, getState) => {
   const state = getState()
   if (!state.currentUser) return null
@@ -68,7 +67,7 @@ export const createGame = () => (dispatch, getState) => {
     .catch(err => console.error(err))
 }
 
-export const updateGame = (gameId, board) => (dispatch, getState) => {
+export const updateGameData = (gameId, data) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
@@ -77,7 +76,7 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
   request
     .patch(`${baseUrl}/games/${gameId}`)
     .set('Authorization', `Bearer ${jwt}`)
-    .send({ board })
+    .send({data})
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
