@@ -2,15 +2,16 @@ import React, { PureComponent } from 'react'
 import CanvasDraw from "react-canvas-draw";
 import { updateGameData } from '../../actions/games'
 import { connect } from 'react-redux'
+import Button from '@material-ui/core/Button'
 
 class CanvasToDraw extends PureComponent {
 
   state = {
-    color: "#ffc600",
-    width: 800,
+    color: '#660066',
+    width: 700,
     height: 600,
-    brushRadius: 3,
-    lazyRadius: 5
+    brushRadius: 2,
+    lazyRadius: 1
   }
 
   saveDrawing = () => {
@@ -32,28 +33,21 @@ class CanvasToDraw extends PureComponent {
     return (
       <div>
         <div>
-          <button
-            onClick={this.saveDrawing}
-          >
-            Save
-          </button>
-          <button
+          <Button style={{backgroundColor: "#ff9900"}}
             onClick={() => {
               this.saveableCanvas.clear();
-            }}
-          >
+            }}>
             Clear
-          </button>
-          <button
+          </Button>
+          <Button style={{backgroundColor: "#ff9900"}}
             onClick={() => {
               this.saveableCanvas.undo();
-            }}
-          >
+            }}>
             Undo
-          </button>
+          </Button>
         </div>
         <div>
-          <label>Width:</label>
+          <label>Change width</label>
           <input
             type="number"
             value={this.state.width}
@@ -63,7 +57,7 @@ class CanvasToDraw extends PureComponent {
           />
         </div>
         <div>
-          <label>Height:</label>
+          <label>Change height</label>
           <input
             type="number"
             value={this.state.height}
@@ -73,22 +67,12 @@ class CanvasToDraw extends PureComponent {
           />
         </div>
         <div>
-          <label>Brush-Radius:</label>
+          <label>Brush's size</label>
           <input
             type="number"
             value={this.state.brushRadius}
             onChange={e =>
               this.setState({ brushRadius: parseInt(e.target.value, 10) })
-            }
-          />
-        </div>
-        <div>
-          <label>Lazy-Radius:</label>
-          <input
-            type="number"
-            value={this.state.lazyRadius}
-            onChange={e =>
-              this.setState({ lazyRadius: parseInt(e.target.value, 10) })
             }
           />
         </div>

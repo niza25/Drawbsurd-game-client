@@ -24,7 +24,7 @@ class GamesList extends PureComponent {
       <Card key={game.id} className="game-card">
         <CardContent>
           <Typography color="textSecondary">
-            This game is played by&nbsp;
+            Played by&nbsp;
             {
               game.players
                 .map(player => users[player.userId].firstName)
@@ -32,7 +32,7 @@ class GamesList extends PureComponent {
             }
           </Typography>
           <Typography variant="headline" component="h2">
-            Game #{game.id}
+            Drawbsurd Nr {game.id}
           </Typography>
           <Typography color="textSecondary">
             Status: {game.status}
@@ -43,7 +43,7 @@ class GamesList extends PureComponent {
             size="small"
             onClick={() => history.push(`/games/${game.id}`)}
           >
-            Watch
+            Get in
           </Button>
         </CardActions>
       </Card>
@@ -66,7 +66,7 @@ class GamesList extends PureComponent {
         onClick={createGame}
         className="create-game"
       >
-        Create Game
+        Create Drawbsurd
       </Button>
 
       <div>
