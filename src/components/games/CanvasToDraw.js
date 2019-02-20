@@ -8,15 +8,12 @@ class CanvasToDraw extends PureComponent {
   state = {
     color: "#ffc600",
     width: 800,
-    height: 500,
-    brushRadius: 4,
+    height: 600,
+    brushRadius: 3,
     lazyRadius: 5
   }
 
-  
-
   saveDrawing = () => {
-    console.log(this.saveableCanvas)
     localStorage.setItem(
       "savedDrawing",
       this.saveableCanvas.getSaveData()

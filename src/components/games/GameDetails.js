@@ -69,7 +69,7 @@ class GameDetails extends PureComponent {
 
     return (
       <Paper className="outer-paper">
-        <h1>Drawbsurd #{game.id}</h1>
+        <h1>Drawbsurd Nr {game.id}</h1>
 
         <p>Your drawbsurd is {game.status}</p>
 

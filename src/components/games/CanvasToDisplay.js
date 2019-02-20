@@ -11,6 +11,7 @@ export default class CanvasToDisplay extends PureComponent {
             <div>
                 <CanvasDraw
                     disabled
+                    immediateLoading={true}
                     hideGrid
                     ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
                     saveData={this.props.canvasDisplay}
