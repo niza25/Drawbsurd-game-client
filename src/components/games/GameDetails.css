@@ -4,3 +4,13 @@
   padding: 20px;
   width: 60%;
 }
+
+#phraseDisplay{
+color: #339966;
+font-size: 2em;
+}
+
+#answerDisplay{
+  color: #660066;
+  font-size: 1.5em;
+}

@@ -63,7 +63,7 @@ class GameDetails extends PureComponent {
           game.status === 'started' &&
           player && player.turn === game.turn &&
           <div>
-            <div>Draw:<span id='phraseDisplay'> "{game.phrase}"</span></div>
+            <div>Draw:<span id='phraseDisplay'> {game.phrase}</span></div>
             <div>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></div>
           </div>
         }
