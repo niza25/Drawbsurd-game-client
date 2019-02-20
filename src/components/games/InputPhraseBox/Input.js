@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Button from '@material-ui/core/Button'
 
 export default function Input(props) {
   return (
@@ -8,7 +9,11 @@ export default function Input(props) {
           name='answer'
           value={props.answer}
           onChange={(e) => props.onChange(e)} />
-        <button onClick={(e) => props.onSubmit(e)}>Send answer</button>
+          <br/>
+        <Button onClick={(e) => props.onSubmit(e)}
+          style={{backgroundColor: "#ff9900", margin: 5 }}
+          size="small">
+          Send answer</Button>
       </form>
     </div>
   )

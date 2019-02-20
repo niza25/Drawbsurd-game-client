@@ -1,3 +1,9 @@
 .colorpicker {
     margin: 20px;
 }
+
+#canvasToDrawContainer{
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+}

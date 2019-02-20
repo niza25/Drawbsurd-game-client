@@ -55,50 +55,52 @@ class GameDetails extends PureComponent {
     const player = game.players.find(p => p.userId === userId)
 
     return (
-      <Paper className="outer-paper">
-        <h1>Drawbsurd Nr {game.id}</h1>
-        <p>Your drawbsurd is {game.status}</p>
+      <div>
+        <Paper className="outer-paper">
+          <h1>Drawbsurd Nr {game.id}</h1>
+          <p>Your drawbsurd is {game.status}</p>
 
-        {
-          game.status === 'started' &&
-          player && player.turn === game.turn &&
-          <div>
-            <div>Draw:<span id='phraseDisplay'> {game.phrase}</span></div>
-            <div>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></div>
-          </div>
-        }
+          {
+            game.status === 'started' &&
+            player && player.turn === game.turn &&
+            <div>
+              <div>Draw:<span id='phraseDisplay'> {game.phrase}</span></div>
+              <div>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></div>
+            </div>
+          }
 
-        {
-          game.status === 'started' &&
-          player && player.turn !== game.turn &&
-          <div>
-            <div>You should be guessing! Type your guess:</div>
-            <Input onChange={this.onChange}
-              answer={this.state.answer}
-              onSubmit={this.onSubmit} />
-          </div>
-        }
+          {
+            game.status === 'started' &&
+            player && player.turn !== game.turn &&
+            <div>
+              <div>You should be guessing! Type your guess:</div>
+              <Input onChange={this.onChange}
+                answer={this.state.answer}
+                onSubmit={this.onSubmit} />
+            </div>
+          }
 
-        {
-          game.status === 'pending' &&
-          game.players.map(p => p.userId).indexOf(userId) === -1 &&
-          <Button
-          onClick={this.joinGame}
-          style={{backgroundColor:'#339966'}}>
-          Join this drawbsurd</Button>
-        }
+          {
+            game.status === 'pending' &&
+            game.players.map(p => p.userId).indexOf(userId) === -1 &&
+            <Button
+              onClick={this.joinGame}
+              style={{ backgroundColor: '#339966' }}>
+              Join this drawbsurd</Button>
+          }
+        </Paper>
+        <Paper className="outer-paper">
+          {
+            game.status !== 'pending' && player.turn === game.turn &&
+            <CanvasToDraw gameId={this.props.match.params.id} />
+          }
 
-        {
-          game.status !== 'pending' && player.turn === game.turn &&
-          <CanvasToDraw gameId={this.props.match.params.id} />
-        }
-
-        {
-          game.status !== 'pending' && player.turn !== game.turn &&
-          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
-        }
-
-      </Paper>)
+          {
+            game.status !== 'pending' && player.turn !== game.turn &&
+            <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
+          }
+        </Paper>
+      </div>)
   }
 }
 

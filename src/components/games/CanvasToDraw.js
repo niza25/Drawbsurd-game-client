@@ -3,7 +3,6 @@ import CanvasDraw from "react-canvas-draw";
 import { updateGameData } from '../../actions/games'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
-
 import { CirclePicker } from 'react-color';
 import './CanvasToDraw.css'
 
@@ -38,38 +37,38 @@ class CanvasToDraw extends PureComponent {
 
   render() {
     return (
-      <div>
-        <div>
+      <div id='canvasToDrawContainer'>
+        <div id='tools'>
           <CirclePicker className='colorpicker'
             color={this.state.background}
             onChangeComplete={this.handleChangeComplete}
           />
           <Button
-          style={{ backgroundColor: "#d32f2f", margin: 20 }}
+            style={{ backgroundColor: "#d32f2f", margin: 20 }}
             onClick={() => {
               this.saveableCanvas.clear();
             }}>
             Clear
           </Button>
           <Button
-          style={{ backgroundColor: "#ff9900", margin: 20 }}
+            style={{ backgroundColor: "#ff9900", margin: 20 }}
             onClick={() => {
               this.saveableCanvas.undo();
             }}>
             Undo
           </Button>
+          <div>
+            <label>Brush's size</label>
+            <input
+              type="number"
+              value={this.state.brushRadius}
+              onChange={e =>
+                this.setState({ brushRadius: parseInt(e.target.value, 10) })
+              }
+            />
+          </div>
         </div>
-        <div>
-          <label>Brush's size</label>
-          <input
-            type="number"
-            value={this.state.brushRadius}
-            onChange={e =>
-              this.setState({ brushRadius: parseInt(e.target.value, 10) })
-            }
-          />
-        </div>
-        <div onClick={this.saveDrawing}>
+        <div onClick={this.saveDrawing} id='onlyCanvas'>
           <CanvasDraw
             ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
             brushColor={this.state.color}
@@ -79,7 +78,6 @@ class CanvasToDraw extends PureComponent {
             canvasHeight={600}
           />
         </div>
-
       </div>
     )
 

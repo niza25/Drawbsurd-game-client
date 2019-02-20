@@ -1,8 +1,9 @@
 .outer-paper {
   margin-top: 20px;
-  margin: auto;
+  margin-bottom: 20px;
   padding: 20px;
-  width: 60%;
+  width: 70%;
+  text-align: center;
 }
 
 #phraseDisplay{
