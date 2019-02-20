@@ -28,7 +28,7 @@ class CanvasToDraw extends PureComponent {
   }
 
   render() {
-    document.addEventListener("click", this.saveDrawing);
+    // document.getElementById('canvasToDraw').addEventListener("click", this.saveDrawing);
 
     return (
       <div>
@@ -76,7 +76,7 @@ class CanvasToDraw extends PureComponent {
             }
           />
         </div>
-        <div>
+        <div onClick={this.saveDrawing}>
           <CanvasDraw
             ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
             brushColor={this.state.color}
