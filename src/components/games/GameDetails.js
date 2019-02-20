@@ -8,8 +8,8 @@ import Paper from '@material-ui/core/Paper'
 import './GameDetails.css'
 import CanvasToDraw from './CanvasToDraw'
 import CanvasToDisplay from './CanvasToDisplay'
-import Phrase from './InputPhraseBox/Phrase'
 import Input from './InputPhraseBox/Input'
+import Button from '@material-ui/core/Button'
 
 class GameDetails extends PureComponent {
 
@@ -57,28 +57,36 @@ class GameDetails extends PureComponent {
     return (
       <Paper className="outer-paper">
         <h1>Drawbsurd Nr {game.id}</h1>
-
         <p>Your drawbsurd is {game.status}</p>
 
         {
           game.status === 'started' &&
           player && player.turn === game.turn &&
-          <div>Draw: "{game.phrase}"</div>
+          <div>
+            <div>Draw:<span id='phraseDisplay'> "{game.phrase}"</span></div>
+            <div>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></div>
+          </div>
         }
 
         {
           game.status === 'started' &&
           player && player.turn !== game.turn &&
-          <div>You should be guessing! Type your guess below</div>
+          <div>
+            <div>You should be guessing! Type your guess:</div>
+            <Input onChange={this.onChange}
+              answer={this.state.answer}
+              onSubmit={this.onSubmit} />
+          </div>
         }
 
         {
           game.status === 'pending' &&
           game.players.map(p => p.userId).indexOf(userId) === -1 &&
-          <button onClick={this.joinGame}>Join this drawbsurd</button>
+          <Button
+          onClick={this.joinGame}
+          style={{backgroundColor:'#339966'}}>
+          Join this drawbsurd</Button>
         }
-
-        <hr />
 
         {
           game.status !== 'pending' && player.turn === game.turn &&
@@ -90,19 +98,6 @@ class GameDetails extends PureComponent {
           <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
         }
 
-        {
-          game.status === 'started' &&
-          player && player.turn === game.turn &&
-          <Phrase answer={this.props.game.answer} />
-        }
-
-        {
-          game.status === 'started' &&
-          player && player.turn !== game.turn &&
-          <Input onChange={this.onChange}
-            answer={this.state.answer}
-            onSubmit={this.onSubmit} />
-        }
       </Paper>)
   }
 }

@@ -7,6 +7,14 @@ import GameDetails from './components/games/GameDetails'
 import LogoutPage from './components/logout/LogoutPage'
 import './App.css'
 import TopBar from './components/layout/TopBar'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Permanent Marker',
+    fontSize: '16'
+  },
+});
 
 // <Route exact path="/signup" component={SignupPage} />
 // <Route exact path="/games" component={GamesList} />
@@ -15,6 +23,7 @@ import TopBar from './components/layout/TopBar'
 class App extends Component {
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Router>
         <div>
           <nav>
@@ -30,6 +39,7 @@ class App extends Component {
           </main>
         </div>
       </Router>
+      </MuiThemeProvider>
     )
   }
 }

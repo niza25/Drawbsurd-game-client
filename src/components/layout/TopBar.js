@@ -8,6 +8,7 @@ import {userId} from '../../jwt'
 import {connect} from 'react-redux'
 import AccountIcon from '@material-ui/icons/AccountBox'
 
+
 const TopBar = (props) => {
   const { location, history, user } = props
 
