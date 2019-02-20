@@ -13,7 +13,7 @@ import CanvasToDisplay from './CanvasToDisplay'
 import Phrase from './InputPhraseBox/Phrase'
 import Input from './InputPhraseBox/Input'
 
-const phrases = ['duck robs a bank', 'to be on top of the world', 'cat smokes a cigar', 'to have a snake in pocket', 'monkey having a BBQ', 'wild programmer'];
+const phrases = ['duck robs a bank', 'to be on top of the world', 'cat smokes a cigar', 'to have a snake in pocket', 'monkey having a BBQ', 'wild programmer', 'git hell', 'space battle'];
 
 
 class GameDetails extends PureComponent {
@@ -76,7 +76,7 @@ class GameDetails extends PureComponent {
         {
           game.status === 'started' &&
           player && player.turn === game.turn &&
-          <div>You should be drawing! Find your phrase below</div>
+          <div>Draw: "{this.state.phrase}"</div>
         }
 
         {
