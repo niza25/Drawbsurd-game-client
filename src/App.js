@@ -11,7 +11,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Permanent Marker',
+    fontFamily: 'Gloria Hallelujah',
     fontSize: '16'
   },
 });

@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import './GameDetails.css'
 import CanvasToDraw from './CanvasToDraw'
 import CanvasToDisplay from './CanvasToDisplay'
-import Input from './InputPhraseBox/Input'
+import Input from './Input'
 import Button from '@material-ui/core/Button'
 
 class GameDetails extends PureComponent {
