@@ -59,14 +59,16 @@ class GamesList extends PureComponent {
 
     return (
       <Paper className="outer-paper">
+      
         <Button
           color="primary"
           variant="contained"
           onClick={createGame}
           className="create-game"
           style={{ backgroundColor: '#339966' }}>
-          Create Drawbsurd
+          Create new Drawbsurd
       </Button>
+
         <div>
           {games.map(game => this.renderGame(game))}
         </div>

@@ -91,7 +91,7 @@ class GameDetails extends PureComponent {
               Join this drawbsurd</Button>
           }
         </Paper>
-        <div className='centered'>
+        <div>
           {
             game.status !== 'pending' && player.turn === game.turn &&
             <CanvasToDraw gameId={this.props.match.params.id} />

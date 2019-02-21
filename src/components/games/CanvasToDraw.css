@@ -14,4 +14,12 @@
     flex-flow: wrap column;
     justify-content: center;
     align-self: center;
+    margin-bottom: 30px;
+}
+
+#buttons{
+    display: flex;
+    direction: row;
+    justify-content: center;
+    align-self: center;
 }

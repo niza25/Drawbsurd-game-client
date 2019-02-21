@@ -55,22 +55,23 @@ class CanvasToDraw extends PureComponent {
             color={this.state.background}
             onChangeComplete={this.handleChangeComplete}
           />
-          <div>
+          <div id='buttons'>
           <Button
-            style={{ backgroundColor: "#d32f2f", margin: 20 }}
+            style={{ backgroundColor: "#d32f2f", margin: 15 }}
             onClick={() => {
               this.saveableCanvas.clear();
             }}>
             Clear
           </Button>
           <Button
-            style={{ backgroundColor: "#ff9900", margin: 20 }}
+            style={{ backgroundColor: "#ff9900", margin: 15 }}
             onClick={() => {
               this.saveableCanvas.undo();
             }}>
-            Undo
+             Undo 
           </Button>
-          <div>
+          </div>
+          <div style={{margin: 'auto'}}>
             <label>Brush's size</label>
             <input
               type="number"
@@ -80,8 +81,9 @@ class CanvasToDraw extends PureComponent {
               }
             />
           </div>
-          </div>
+          
         </div>
+      
       </div>
     )
 
