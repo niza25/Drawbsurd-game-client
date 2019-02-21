@@ -57,8 +57,10 @@ export default class SignupForm extends PureComponent {
 						<p style={{ color: 'red' }}>The passwords do not match!</p>
 					}
 
+
 					<Button type="submit"
 						style={{ backgroundColor: '#339966' }}>Sign up</Button>
+
 				</form>
 			</div>
 		)

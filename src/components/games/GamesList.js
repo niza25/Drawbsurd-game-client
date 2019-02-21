@@ -57,8 +57,8 @@ class GamesList extends PureComponent {
 
     if (games === null || users === null) return null
 
-    return (
       <div>
+
         <Button
           color="primary"
           variant="contained"

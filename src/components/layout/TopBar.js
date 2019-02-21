@@ -3,9 +3,9 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import {withRouter} from 'react-router'
-import {userId} from '../../jwt'
-import {connect} from 'react-redux'
+import { withRouter } from 'react-router'
+import { userId } from '../../jwt'
+import { connect } from 'react-redux'
 import AccountIcon from '@material-ui/icons/AccountBox'
 import logo from '../../logo.png'
 
@@ -14,15 +14,15 @@ const TopBar = (props) => {
   const { location, history, user } = props
 
   return (
-    <AppBar position="absolute" style={{zIndex:10, backgroundColor:'#339966'}}>
+    <AppBar position="absolute" style={{ zIndex: 10, backgroundColor: '#339966' }}>
       <Toolbar>
-        <img src={logo} alt='logo' style={{height: 70}} />
-        <Typography variant="title" color="inherit" style={{flex: 1}}>
-         
+        <img src={logo} alt='logo' style={{ height: 70 }} />
+        <Typography variant="title" color="inherit" style={{ flex: 1 }}>
+
         </Typography>
         {
           user &&
-          <Button color="inherit"><AccountIcon /> { user.firstName }</Button>
+          <Button color="inherit"><AccountIcon /> {user.firstName}</Button>
         }
 
         {

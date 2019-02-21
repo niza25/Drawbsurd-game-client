@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 import './LoginForm.css'
 import Button from '@material-ui/core/Button'
 
@@ -11,34 +11,35 @@ export default class LoginForm extends PureComponent {
 	}
 
 	handleChange = (event) => {
-    const {name, value} = event.target
+		const { name, value } = event.target
 
-    this.setState({
-      [name]: value
-    })
-  }
+		this.setState({
+			[name]: value
+		})
+	}
 
 	render() {
 		return (
-      <div className="login-form">
-  			<form onSubmit={this.handleSubmit}>
-  				<label>
-            Email
+			<div className="login-form">
+				<form onSubmit={this.handleSubmit}>
+					<label>
+						Email
             <input type="email" name="email" value={
-  						this.state.email || ''
-  					} onChange={ this.handleChange } />
-          </label>
+							this.state.email || ''
+						} onChange={this.handleChange} />
+					</label>
 
-  				<label>
-            Password
+					<label>
+						Password
             <input type="password" name="password" value={
-  						this.state.password || ''
-  					} onChange={ this.handleChange } />
-          </label>
+							this.state.password || ''
+						} onChange={this.handleChange} />
+					</label>
+
 
   				<Button type="submit"
 					style={{ backgroundColor: '#339966'}}>Login</Button>
   			</form>
 		  </div>)
+
 	}
-}
