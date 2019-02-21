@@ -80,3 +80,16 @@ export const updateGameData = (gameId, data) => (dispatch, getState) => {
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
+
+export const changeStatus = (gameId) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .post(`${baseUrl}/games/${gameId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(_ => dispatch(updateGameSuccess()))
+    .catch(err => console.error(err))
+}

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getGames, joinGame, updateGameData } from '../../actions/games'
+import { getGames, joinGame, updateGameData, changeStatus } from '../../actions/games'
 import { getUsers } from '../../actions/users'
 import { userId } from '../../jwt'
 import Paper from '@material-ui/core/Paper'
@@ -32,16 +32,59 @@ class GameDetails extends PureComponent {
     })
   }
 
-  onSubmit = (event) => {
+  getArrays = () => {
+    const game = this.props.game
+    const arrayPhrase = game.phrase.split(' ')
+    const arrayAnswer = game.answer.split(' ')
+    const winnerArray = [];
+    arrayPhrase.forEach((e1) => arrayAnswer.forEach((e2) =>
+    {if (e1 === e2){
+      winnerArray.push(e1)
+    }
+  }
+  ));
+    return winnerArray;
+    } 
+
+  calculateWinner = () => {
+    this.getArrays()
+    if (this.getArrays().length >= 2) {
+      this.props.changeStatus(this.props.game.id)
+    }
+  }
+
+  // getGuesser = () => {
+  //   const player = this.props.game.players.find(p => p.userId === userId)
+  //   const opponentName = this.props.users
+  //   [this.props.game.players.find(p => p.userId !== userId).userId].firstName
+  //   let guesser;
+  //   if (player.turn === 'guessing') {
+  //     guesser = this.props.users[userId].firstName
+  //   } else {
+  //     guesser = opponentName
+  //   }
+  //   return guesser;
+  // }
+  
+// async updateOnSubmit() {
+//     this.props.updateGameData(this.props.game.id, this.state.answer)
+// }
+
+onSubmit = (event) => {
     event.preventDefault()
     this.props.updateGameData(this.props.game.id, this.state.answer)
+    setTimeout(() => {
+    this.calculateWinner()
+    }, 100
+    )
     this.setState({
       answer: ''
     })
   }
+  
 
   render() {
-
+    
     const { game, users, authenticated, userId } = this.props
 
     if (!authenticated) return (
@@ -51,8 +94,8 @@ class GameDetails extends PureComponent {
     if (game === null || users === null) return 'Loading...'
     if (!game) return 'Not found'
 
-
     const player = game.players.find(p => p.userId === userId)
+
 
     return (
       <Paper className="outer-paper">
@@ -62,6 +105,7 @@ class GameDetails extends PureComponent {
         {
           game.status === 'started' &&
           player && player.turn === game.turn &&
+
           <div>
             <div>Draw:<span id='phraseDisplay'> {game.phrase}</span></div>
             <div>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></div>
@@ -89,15 +133,24 @@ class GameDetails extends PureComponent {
         }
 
         {
-          game.status !== 'pending' && player.turn === game.turn &&
+          game.status !== 'pending' && game.status !== 'finished' && player.turn === game.turn &&
           <CanvasToDraw gameId={this.props.match.params.id} />
         }
 
         {
-          game.status !== 'pending' && player.turn !== game.turn &&
+          game.status !== 'pending' && game.status !== 'finished' && player.turn !== game.turn &&
           <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
         }
 
+        {
+          game.status === 'finished' && player && 
+          <div><p>We have a winner! <br></br>
+            The guesser answered: {this.props.game.answer}
+          </p>
+          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
+          
+          </div>
+        }
       </Paper>)
   }
 }
@@ -110,7 +163,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGameData
+  getGames, getUsers, joinGame, updateGameData, changeStatus
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
