@@ -7,6 +7,7 @@ import {withRouter} from 'react-router'
 import {userId} from '../../jwt'
 import {connect} from 'react-redux'
 import AccountIcon from '@material-ui/icons/AccountBox'
+import logo from '../../logo.png'
 
 
 const TopBar = (props) => {
@@ -15,8 +16,9 @@ const TopBar = (props) => {
   return (
     <AppBar position="absolute" style={{zIndex:10, backgroundColor:'#339966'}}>
       <Toolbar>
+        <img src={logo} alt='logo' style={{height: 70}} />
         <Typography variant="title" color="inherit" style={{flex: 1}}>
-          Drawbsurd
+         
         </Typography>
         {
           user &&
@@ -33,7 +35,7 @@ const TopBar = (props) => {
         }
         {
           location.pathname.indexOf('games/') > 0 &&
-          <Button color="inherit" onClick={() => history.push('/games')}>All Games</Button>
+          <Button color="inherit" onClick={() => history.push('/games')}>Back</Button>
         }
         {
           /games$/.test(location.pathname) &&

@@ -4,7 +4,9 @@ h2 {
 }
 
 .game-card {
-  margin: 10px 10px 10px 0px;
+  margin: 10px 10px 10px 10px;
+  background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(199,148,233,1) 100%);
 }
 
 .create-game {

@@ -3,7 +3,6 @@ import CanvasDraw from "react-canvas-draw";
 import { updateGameData } from '../../actions/games'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
-
 import { CirclePicker } from 'react-color';
 import './CanvasToDraw.css'
 
@@ -38,37 +37,8 @@ class CanvasToDraw extends PureComponent {
 
   render() {
     return (
-      <div>
-        <div>
-          <CirclePicker className='colorpicker'
-            color={this.state.background}
-            onChangeComplete={this.handleChangeComplete}
-          />
-          <Button
-          style={{ backgroundColor: "#d32f2f", margin: 20 }}
-            onClick={() => {
-              this.saveableCanvas.clear();
-            }}>
-            Clear
-          </Button>
-          <Button
-          style={{ backgroundColor: "#ff9900", margin: 20 }}
-            onClick={() => {
-              this.saveableCanvas.undo();
-            }}>
-            Undo
-          </Button>
-        </div>
-        <div>
-          <label>Brush's size</label>
-          <input
-            type="number"
-            value={this.state.brushRadius}
-            onChange={e =>
-              this.setState({ brushRadius: parseInt(e.target.value, 10) })
-            }
-          />
-        </div>
+      <div id='canvasToDrawContainer'>
+        
         <div onClick={this.saveDrawing}>
           <CanvasDraw
             ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
@@ -78,8 +48,42 @@ class CanvasToDraw extends PureComponent {
             canvasWidth={700}
             canvasHeight={600}
           />
-        </div>
+          </div>
 
+          <div id='tools'>
+          <CirclePicker className='colorpicker'
+            color={this.state.background}
+            onChangeComplete={this.handleChangeComplete}
+          />
+          <div id='buttons'>
+          <Button
+            style={{ backgroundColor: "#d32f2f", margin: 15 }}
+            onClick={() => {
+              this.saveableCanvas.clear();
+            }}>
+            Clear
+          </Button>
+          <Button
+            style={{ backgroundColor: "#ff9900", margin: 15 }}
+            onClick={() => {
+              this.saveableCanvas.undo();
+            }}>
+             Undo 
+          </Button>
+          </div>
+          <div style={{margin: 'auto'}}>
+            <label>Brush's size</label>
+            <input
+              type="number"
+              value={this.state.brushRadius}
+              onChange={e =>
+                this.setState({ brushRadius: parseInt(e.target.value, 10) })
+              }
+            />
+          </div>
+          
+        </div>
+      
       </div>
     )
 

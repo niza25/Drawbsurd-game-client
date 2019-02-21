@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import './GameDetails.css'
 import CanvasToDraw from './CanvasToDraw'
 import CanvasToDisplay from './CanvasToDisplay'
-import Input from './InputPhraseBox/Input'
+import Input from './Input'
 import Button from '@material-ui/core/Button'
 
 class GameDetails extends PureComponent {
@@ -98,49 +98,54 @@ onSubmit = (event) => {
 
 
     return (
-      <Paper className="outer-paper">
-        <h1>Drawbsurd Nr {game.id}</h1>
-        <p>Your drawbsurd is {game.status}</p>
 
-        {
-          game.status === 'started' &&
-          player && player.turn === game.turn &&
-
-          <div>
-            <div>Draw:<span id='phraseDisplay'> {game.phrase}</span></div>
-            <div>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></div>
+      <div>
+        <Paper className="outer-paper">
+        <div>
+          <h1>Drawbsurd Nr {game.id}</h1>
+          <p>The round has {game.status}</p>
           </div>
-        }
 
-        {
-          game.status === 'started' &&
-          player && player.turn !== game.turn &&
-          <div>
-            <div>You should be guessing! Type your guess:</div>
-            <Input onChange={this.onChange}
-              answer={this.state.answer}
-              onSubmit={this.onSubmit} />
-          </div>
-        }
+          {
+            game.status === 'started' &&
+            player && player.turn === game.turn &&
+            <div>
+              <p>Draw:<span className='phraseDisplay'> {game.phrase}</span></p>
+              <p>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></p>
+            </div>
+          }
 
-        {
-          game.status === 'pending' &&
-          game.players.map(p => p.userId).indexOf(userId) === -1 &&
-          <Button
-          onClick={this.joinGame}
-          style={{backgroundColor:'#339966'}}>
-          Join this drawbsurd</Button>
-        }
+          {
+            game.status === 'started' &&
+            player && player.turn !== game.turn &&
+            <div>
+              <p>What's on the picture? Type your guess:</p>
+              <Input onChange={this.onChange}
+                answer={this.state.answer}
+                onSubmit={this.onSubmit} />
+            </div>
+          }
 
-        {
+          {
+            game.status === 'pending' &&
+            game.players.map(p => p.userId).indexOf(userId) === -1 &&
+            <Button
+              onClick={this.joinGame}
+              style={{ backgroundColor: '#339966' }}>
+              Join this drawbsurd</Button>
+          }
+        </Paper>
+        <div>
+          {
           game.status !== 'pending' && game.status !== 'finished' && player.turn === game.turn &&
           <CanvasToDraw gameId={this.props.match.params.id} />
         }
 
-        {
+          {
           game.status !== 'pending' && game.status !== 'finished' && player.turn !== game.turn &&
           <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
         }
+        </div>
 
         {
           game.status === 'finished' && player && 
@@ -151,7 +156,8 @@ onSubmit = (event) => {
           
           </div>
         }
-      </Paper>)
+     
+</div>)
   }
 }
 

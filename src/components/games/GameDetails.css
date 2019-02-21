@@ -1,11 +1,14 @@
 .outer-paper {
+  display: flex;
+  justify-content: space-evenly;
   margin-top: 20px;
-  margin: auto;
+  margin-bottom: 20px;
   padding: 20px;
-  width: 60%;
+  width: 70%;
+  text-align: center;
 }
 
-#phraseDisplay{
+.phraseDisplay{
 color: #339966;
 font-size: 2em;
 }
