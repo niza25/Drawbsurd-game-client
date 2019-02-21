@@ -59,7 +59,7 @@ class GamesList extends PureComponent {
 
     return (
       <Paper className="outer-paper">
-      
+
         <Button
           color="primary"
           variant="contained"
