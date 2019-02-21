@@ -96,7 +96,6 @@ onSubmit = (event) => {
 
     const player = game.players.find(p => p.userId === userId)
 
-
     return (
 
       <div>
@@ -114,6 +113,16 @@ onSubmit = (event) => {
               <p>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></p>
             </div>
           }
+
+          {
+            game.status === 'finished' && player && 
+            <div>
+            <p>We have a winner!</p>
+             <p>{game.players
+                  .map(player => users[player.userId].firstName)[1]} answered: <span className='phraseDisplay'> {this.props.game.answer}</span></p>
+            </div>
+          }
+
 
           {
             game.status === 'started' &&
@@ -145,17 +154,17 @@ onSubmit = (event) => {
           game.status !== 'pending' && game.status !== 'finished' && player.turn !== game.turn &&
           <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
         }
+
+{
+          game.status === 'finished' && player && 
+          <div>
+            <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
+          
+              </div>
+           }
         </div>
 
-        {
-          game.status === 'finished' && player && 
-          <div><p>We have a winner! <br></br>
-            The guesser answered: {this.props.game.answer}
-          </p>
-          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
-          
-          </div>
-        }
+       
      
 </div>)
   }
