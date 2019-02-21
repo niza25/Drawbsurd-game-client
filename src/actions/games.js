@@ -1,7 +1,7 @@
 import * as request from 'superagent'
-import {baseUrl} from '../constants'
-import {logout} from './users'
-import {isExpired} from '../jwt'
+import { baseUrl } from '../constants'
+import { logout } from './users'
+import { isExpired } from '../jwt'
 
 export const ADD_GAME = 'ADD_GAME'
 export const UPDATE_GAME = 'UPDATE_GAME'
@@ -76,7 +76,20 @@ export const updateGameData = (gameId, data) => (dispatch, getState) => {
   request
     .patch(`${baseUrl}/games/${gameId}`)
     .set('Authorization', `Bearer ${jwt}`)
-    .send({data})
+    .send({ data })
+    .then(_ => dispatch(updateGameSuccess()))
+    .catch(err => console.error(err))
+}
+
+export const changeStatus = (gameId) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .post(`${baseUrl}/games/${gameId}`)
+    .set('Authorization', `Bearer ${jwt}`)
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }

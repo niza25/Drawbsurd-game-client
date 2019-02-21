@@ -7,29 +7,35 @@ import GameDetails from './components/games/GameDetails'
 import LogoutPage from './components/logout/LogoutPage'
 import './App.css'
 import TopBar from './components/layout/TopBar'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-// <Route exact path="/signup" component={SignupPage} />
-// <Route exact path="/games" component={GamesList} />
-// <Route exact path="/games/:id" component={GameDetails} />
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Gloria Hallelujah',
+    fontSize: '16'
+  },
+});
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
-          <nav>
-            <TopBar />
-          </nav>
-          <main style={{marginTop:75}}>
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/logout" component={LogoutPage} />
-            <Route exact path="/signup" component={SignupPage} />
-            <Route exact path="/games" component={GamesList} />
-            <Route exact path="/games/:id" component={GameDetails} />
-            <Route exact path="/" render={ () => <Redirect to="/games" /> } />
-          </main>
-        </div>
-      </Router>
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <div>
+            <nav>
+              <TopBar />
+            </nav>
+            <main style={{ marginTop: 75 }}>
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/logout" component={LogoutPage} />
+              <Route exact path="/signup" component={SignupPage} />
+              <Route exact path="/games" component={GamesList} />
+              <Route exact path="/games/:id" component={GameDetails} />
+              <Route exact path="/" render={() => <Redirect to="/games" />} />
+            </main>
+          </div>
+        </Router>
+      </MuiThemeProvider>
     )
   }
 }

@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
-import {getUsers} from '../../actions/users'
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import React, { PureComponent } from 'react'
+import { getGames, createGame } from '../../actions/games'
+import { getUsers } from '../../actions/users'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
-import { Card, CardActions, CardContent } from '@material-ui/core'
+import { Card, CardContent } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import './GamesList.css'
 
@@ -18,7 +18,7 @@ class GamesList extends PureComponent {
   }
 
   renderGame = (game) => {
-    const {users, history} = this.props
+    const { users, history } = this.props
 
     return (
       <Card key={game.id} className="game-card">
@@ -38,44 +38,47 @@ class GamesList extends PureComponent {
             Status: {game.status}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            onClick={() => history.push(`/games/${game.id}`)}
-          >
-            Get in
+        <Button
+          style={{ color: '#339966' }}
+          size="medium"
+          onClick={() => history.push(`/games/${game.id}`)}>
+          Get in and draw something
           </Button>
-        </CardActions>
       </Card>
     )
   }
 
   render() {
-    const {games, users, authenticated, createGame} = this.props
+    const { games, users, authenticated, createGame } = this.props
 
     if (!authenticated) return (
-			<Redirect to="/login" />
-		)
+      <Redirect to="/login" />
+    )
 
     if (games === null || users === null) return null
 
-    return (<Paper className="outer-paper">
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={createGame}
-        className="create-game"
-        style={{backgroundColor:'#339966'}}
-      >
-        Create Drawbsurd
+    return (
+      <div>
+
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={createGame}
+          style={{ backgroundColor: '#339966', display: 'block', margin: 'auto' }}
+          className="create-game" >
+          Create new Drawbsurd
       </Button>
 
-      <div>
-        {games.map(game => this.renderGame(game))}
+        <Paper className="outer-paper">
+          <div>
+            {games.map(game => this.renderGame(game))}
+          </div>
+        </Paper>
       </div>
-    </Paper>)
+    )
   }
 }
+
 
 const mapStateToProps = state => ({
   authenticated: state.currentUser !== null,
@@ -84,4 +87,4 @@ const mapStateToProps = state => ({
     null : Object.values(state.games).sort((a, b) => b.id - a.id)
 })
 
-export default connect(mapStateToProps, {getGames, getUsers, createGame})(GamesList)
+export default connect(mapStateToProps, { getGames, getUsers, createGame })(GamesList)
