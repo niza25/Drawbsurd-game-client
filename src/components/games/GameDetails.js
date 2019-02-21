@@ -37,14 +37,14 @@ class GameDetails extends PureComponent {
     const arrayPhrase = game.phrase.split(' ')
     const arrayAnswer = game.answer.split(' ')
     const winnerArray = [];
-    arrayPhrase.forEach((e1) => arrayAnswer.forEach((e2) =>
-    {if (e1 === e2){
-      winnerArray.push(e1)
+    arrayPhrase.forEach((e1) => arrayAnswer.forEach((e2) => {
+      if (e1 === e2) {
+        winnerArray.push(e1)
+      }
     }
-  }
-  ));
+    ));
     return winnerArray;
-    } 
+  }
 
   calculateWinner = () => {
     this.getArrays()
@@ -53,38 +53,21 @@ class GameDetails extends PureComponent {
     }
   }
 
-  // getGuesser = () => {
-  //   const player = this.props.game.players.find(p => p.userId === userId)
-  //   const opponentName = this.props.users
-  //   [this.props.game.players.find(p => p.userId !== userId).userId].firstName
-  //   let guesser;
-  //   if (player.turn === 'guessing') {
-  //     guesser = this.props.users[userId].firstName
-  //   } else {
-  //     guesser = opponentName
-  //   }
-  //   return guesser;
-  // }
-  
-// async updateOnSubmit() {
-//     this.props.updateGameData(this.props.game.id, this.state.answer)
-// }
-
-onSubmit = (event) => {
+  onSubmit = (event) => {
     event.preventDefault()
     this.props.updateGameData(this.props.game.id, this.state.answer)
     setTimeout(() => {
-    this.calculateWinner()
+      this.calculateWinner()
     }, 100
     )
     this.setState({
       answer: ''
     })
   }
-  
+
 
   render() {
-    
+
     const { game, users, authenticated, userId } = this.props
 
     if (!authenticated) return (
@@ -100,9 +83,9 @@ onSubmit = (event) => {
 
       <div>
         <Paper className="outer-paper">
-        <div>
-          <h1>Drawbsurd Nr {game.id}</h1>
-          <p>The round has {game.status}</p>
+          <div>
+            <h1>Drawbsurd Nr {game.id}</h1>
+            <p>The round has {game.status}</p>
           </div>
 
           {
@@ -115,11 +98,11 @@ onSubmit = (event) => {
           }
 
           {
-            game.status === 'finished' && player && 
+            game.status === 'finished' && player &&
             <div>
-            <p>We have a winner!</p>
-             <p>{game.players
-                  .map(player => users[player.userId].firstName)[1]} answered: <span className='phraseDisplay'> {this.props.game.answer}</span></p>
+              <p>We have a winner!</p>
+              <p>{game.players
+                .map(player => users[player.userId].firstName)[1]} answered: <span className='phraseDisplay'> {this.props.game.answer}</span></p>
             </div>
           }
 
@@ -146,27 +129,27 @@ onSubmit = (event) => {
         </Paper>
         <div>
           {
-          game.status !== 'pending' && game.status !== 'finished' && player.turn === game.turn &&
-          <CanvasToDraw gameId={this.props.match.params.id} />
-        }
+            game.status !== 'pending' && game.status !== 'finished' && player.turn === game.turn &&
+            <CanvasToDraw gameId={this.props.match.params.id} />
+          }
 
           {
-          game.status !== 'pending' && game.status !== 'finished' && player.turn !== game.turn &&
-          <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
-        }
-
-{
-          game.status === 'finished' && player && 
-          <div>
+            game.status !== 'pending' && game.status !== 'finished' && player.turn !== game.turn &&
             <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
-          
-              </div>
-           }
+          }
+
+          {
+            game.status === 'finished' && player &&
+            <div>
+              <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
+
+            </div>
+          }
         </div>
 
-       
-     
-</div>)
+
+
+      </div>)
   }
 }
 

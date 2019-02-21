@@ -38,7 +38,7 @@ class CanvasToDraw extends PureComponent {
   render() {
     return (
       <div id='canvasToDrawContainer'>
-        
+
         <div onClick={this.saveDrawing}>
           <CanvasDraw
             ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
@@ -48,30 +48,30 @@ class CanvasToDraw extends PureComponent {
             canvasWidth={700}
             canvasHeight={600}
           />
-          </div>
+        </div>
 
-          <div id='tools'>
+        <div id='tools'>
           <CirclePicker className='colorpicker'
             color={this.state.background}
             onChangeComplete={this.handleChangeComplete}
           />
           <div id='buttons'>
-          <Button
-            style={{ backgroundColor: "#d32f2f", margin: 15 }}
-            onClick={() => {
-              this.saveableCanvas.clear();
-            }}>
-            Clear
+            <Button
+              style={{ backgroundColor: "#d32f2f", margin: 15 }}
+              onClick={() => {
+                this.saveableCanvas.clear();
+              }}>
+              Clear
           </Button>
-          <Button
-            style={{ backgroundColor: "#ff9900", margin: 15 }}
-            onClick={() => {
-              this.saveableCanvas.undo();
-            }}>
-             Undo 
+            <Button
+              style={{ backgroundColor: "#ff9900", margin: 15 }}
+              onClick={() => {
+                this.saveableCanvas.undo();
+              }}>
+              Undo
           </Button>
           </div>
-          <div style={{margin: 'auto'}}>
+          <div style={{ margin: 'auto' }}>
             <label>Brush's size</label>
             <input
               type="number"
@@ -81,9 +81,9 @@ class CanvasToDraw extends PureComponent {
               }
             />
           </div>
-          
+
         </div>
-      
+
       </div>
     )
 
