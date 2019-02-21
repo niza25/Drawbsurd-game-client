@@ -57,15 +57,17 @@ class GameDetails extends PureComponent {
     return (
       <div>
         <Paper className="outer-paper">
+        <div>
           <h1>Drawbsurd Nr {game.id}</h1>
-          <p>Your drawbsurd is {game.status}</p>
+          <p>The round has {game.status}</p>
+          </div>
 
           {
             game.status === 'started' &&
             player && player.turn === game.turn &&
             <div>
-              <div>Draw:<span id='phraseDisplay'> {game.phrase}</span></div>
-              <div>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></div>
+              <p>Draw:<span className='phraseDisplay'> {game.phrase}</span></p>
+              <p>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></p>
             </div>
           }
 
@@ -73,7 +75,7 @@ class GameDetails extends PureComponent {
             game.status === 'started' &&
             player && player.turn !== game.turn &&
             <div>
-              <div>You should be guessing! Type your guess:</div>
+              <p>What's on the picture? Type your guess:</p>
               <Input onChange={this.onChange}
                 answer={this.state.answer}
                 onSubmit={this.onSubmit} />
@@ -89,7 +91,7 @@ class GameDetails extends PureComponent {
               Join this drawbsurd</Button>
           }
         </Paper>
-        <Paper className="outer-paper">
+        <div className='centered'>
           {
             game.status !== 'pending' && player.turn === game.turn &&
             <CanvasToDraw gameId={this.props.match.params.id} />
@@ -99,7 +101,7 @@ class GameDetails extends PureComponent {
             game.status !== 'pending' && player.turn !== game.turn &&
             <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
           }
-        </Paper>
+        </div>
       </div>)
   }
 }

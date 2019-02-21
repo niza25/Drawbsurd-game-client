@@ -8,15 +8,14 @@ export default class CanvasToDisplay extends PureComponent {
         if (!this.props.canvasDisplay) return 'Waiting for the drawing...'
 
         return (
-            <div>
-                <CanvasDraw
+            
+                <CanvasDraw style={{margin: '0 auto'}}
                     disabled
                     immediateLoading={true}
                     hideGrid
                     ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
                     saveData={this.props.canvasDisplay}
                 />
-            </div>
 
             //     <button
             //     onClick={() => {

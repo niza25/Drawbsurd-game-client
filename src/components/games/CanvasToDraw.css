@@ -4,6 +4,14 @@
 
 #canvasToDrawContainer{
     display: flex;
-    flex-flow: wrap row;
+    direction: row;
+    flex-wrap: wrap;
     justify-content: center;
+}
+
+#tools{
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-self: center;
 }

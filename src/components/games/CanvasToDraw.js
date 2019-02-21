@@ -38,11 +38,24 @@ class CanvasToDraw extends PureComponent {
   render() {
     return (
       <div id='canvasToDrawContainer'>
-        <div id='tools'>
+        
+        <div onClick={this.saveDrawing}>
+          <CanvasDraw
+            ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
+            brushColor={this.state.color}
+            brushRadius={this.state.brushRadius}
+            lazyRadius={1}
+            canvasWidth={700}
+            canvasHeight={600}
+          />
+          </div>
+
+          <div id='tools'>
           <CirclePicker className='colorpicker'
             color={this.state.background}
             onChangeComplete={this.handleChangeComplete}
           />
+          <div>
           <Button
             style={{ backgroundColor: "#d32f2f", margin: 20 }}
             onClick={() => {
@@ -67,16 +80,7 @@ class CanvasToDraw extends PureComponent {
               }
             />
           </div>
-        </div>
-        <div onClick={this.saveDrawing} id='onlyCanvas'>
-          <CanvasDraw
-            ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
-            brushColor={this.state.color}
-            brushRadius={this.state.brushRadius}
-            lazyRadius={1}
-            canvasWidth={700}
-            canvasHeight={600}
-          />
+          </div>
         </div>
       </div>
     )
