@@ -57,6 +57,7 @@ class GamesList extends PureComponent {
 
     if (games === null || users === null) return null
 
+    return (
       <div>
 
         <Button
@@ -67,14 +68,17 @@ class GamesList extends PureComponent {
           className="create-game" >
           Create new Drawbsurd
       </Button>
+
         <Paper className="outer-paper">
           <div>
             {games.map(game => this.renderGame(game))}
           </div>
         </Paper>
-      </div>)
+      </div>
+    )
   }
 }
+
 
 const mapStateToProps = state => ({
   authenticated: state.currentUser !== null,

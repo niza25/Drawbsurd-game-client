@@ -37,9 +37,10 @@ export default class LoginForm extends PureComponent {
 					</label>
 
 
-  				<Button type="submit"
-					style={{ backgroundColor: '#339966'}}>Login</Button>
-  			</form>
-		  </div>)
+					<Button type="submit"
+						style={{ backgroundColor: '#339966' }}>Login</Button>
+				</form>
+			</div>)
 
 	}
+}
