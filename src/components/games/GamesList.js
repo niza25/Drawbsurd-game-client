@@ -57,22 +57,22 @@ class GamesList extends PureComponent {
 
     if (games === null || users === null) return null
 
-    return (
-      <Paper className="outer-paper">
+      <div>
 
         <Button
           color="primary"
           variant="contained"
           onClick={createGame}
-          className="create-game"
-          style={{ backgroundColor: '#339966' }}>
+          style={{ backgroundColor: '#339966', display: 'block', margin: 'auto' }}
+          className="create-game" >
           Create new Drawbsurd
       </Button>
-
-        <div>
-          {games.map(game => this.renderGame(game))}
-        </div>
-      </Paper>)
+        <Paper className="outer-paper">
+          <div>
+            {games.map(game => this.renderGame(game))}
+          </div>
+        </Paper>
+      </div>)
   }
 }
 
