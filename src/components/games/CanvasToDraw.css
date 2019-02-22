@@ -10,11 +10,15 @@
 }
 
 #tools{
+    background-color: white;
     display: flex;
     flex-flow: wrap column;
     justify-content: center;
     align-self: center;
     margin-bottom: 30px;
+    margin-left: 20px;
+    padding: 20px;
+    border-radius: 5px;
 }
 
 #buttons{

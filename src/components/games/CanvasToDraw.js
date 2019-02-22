@@ -81,7 +81,6 @@ class CanvasToDraw extends PureComponent {
               }
             />
           </div>
-
         </div>
 
       </div>
