@@ -32,10 +32,10 @@ class GameDetails extends PureComponent {
     })
   }
 
-  getArrays = () => {
+  calculateWinner = () => {
     const game = this.props.game
-    const arrayPhrase = game.phrase.split(' ')
-    const arrayAnswer = game.answer.split(' ')
+    const arrayPhrase = game.phrase.toLowerCase().replace('-','').split(' ')
+    const arrayAnswer = game.answer.toLowerCase().replace('-','').split(' ')
     const winnerArray = [];
     arrayPhrase.forEach((e1) => arrayAnswer.forEach((e2) => {
       if (e1 === e2) {
@@ -43,12 +43,9 @@ class GameDetails extends PureComponent {
       }
     }
     ));
-    return winnerArray;
-  }
-
-  calculateWinner = () => {
-    this.getArrays()
-    if (this.getArrays().length >= 2) {
+    console.log(arrayPhrase, 'arrayPhrase')
+    console.log(arrayAnswer, 'arrayAnswer')
+    if (winnerArray.length >= 2) {
       this.props.changeStatus(this.props.game.id)
     }
   }
@@ -58,7 +55,7 @@ class GameDetails extends PureComponent {
     this.props.updateGameData(this.props.game.id, this.state.answer)
     setTimeout(() => {
       this.calculateWinner()
-    }, 100
+    }, 500
     )
     this.setState({
       answer: ''
