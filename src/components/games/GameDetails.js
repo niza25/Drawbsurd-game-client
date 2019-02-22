@@ -10,11 +10,15 @@ import CanvasToDraw from './CanvasToDraw'
 import CanvasToDisplay from './CanvasToDisplay'
 import Input from './Input'
 import Button from '@material-ui/core/Button'
+import Countdown from 'react-countdown-now'
+
+const Completionist = () => <p style={{ color: 'red' }}>Your time is up!</p>
 
 class GameDetails extends PureComponent {
 
   state = {
-    answer: ''
+    answer: '',
+    // winner: ''
   }
 
   componentWillMount() {
@@ -32,10 +36,11 @@ class GameDetails extends PureComponent {
     })
   }
 
-  getArrays = () => {
-    const game = this.props.game
-    const arrayPhrase = game.phrase.split(' ')
-    const arrayAnswer = game.answer.split(' ')
+  calculateWinner = () => {
+    const { game, users, userId } = this.props
+    const player = game.players.find(p => p.userId === userId)
+    const arrayPhrase = game.phrase.toLowerCase().replace('-', '').split(' ')
+    const arrayAnswer = game.answer.toLowerCase().replace('-', '').split(' ')
     const winnerArray = [];
     arrayPhrase.forEach((e1) => arrayAnswer.forEach((e2) => {
       if (e1 === e2) {
@@ -43,22 +48,22 @@ class GameDetails extends PureComponent {
       }
     }
     ));
-    return winnerArray;
-  }
-
-  calculateWinner = () => {
-    this.getArrays()
-    if (this.getArrays().length >= 2) {
-      this.props.changeStatus(this.props.game.id)
+    console.log(arrayPhrase, 'arrayPhrase')
+    console.log(arrayAnswer, 'arrayAnswer')
+    if (winnerArray.length >= 2) {
+      this.props.changeStatus(game.id, users[player.userId].firstName)
+      // this.setState({winner: users[player.userId].firstName})
     }
   }
 
   onSubmit = (event) => {
+    const { game, users, userId } = this.props
+    const player = game.players.find(p => p.userId === userId)
     event.preventDefault()
     this.props.updateGameData(this.props.game.id, this.state.answer)
     setTimeout(() => {
       this.calculateWinner()
-    }, 100
+    }, 500
     )
     this.setState({
       answer: ''
@@ -78,9 +83,9 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
+    // let winner;
 
     return (
-
       <div>
         <Paper className="outer-paper">
           <div>
@@ -90,10 +95,24 @@ class GameDetails extends PureComponent {
 
           {
             game.status === 'started' &&
+            game.players.map(p => p.userId).indexOf(userId) === -1 &&
+            <Button
+              onClick={this.joinGame}
+              style={{ backgroundColor: '#339966' }}>
+              Join this drawbsurd</Button>
+          }
+
+          {
+            game.status === 'started' &&
             player && player.turn === game.turn &&
             <div>
               <p>Draw:<span className='phraseDisplay'> {game.phrase}</span></p>
               <p>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></p>
+              <div style={{ margin: '0 auto', fontSize: '1.5em' }}>
+                <Countdown date={Date.now() + 9000}>
+                  <Completionist />
+                </Countdown>
+              </div>
             </div>
           }
 
@@ -101,8 +120,7 @@ class GameDetails extends PureComponent {
             game.status === 'finished' && player &&
             <div>
               <p>We have a winner!</p>
-              <p>{game.players
-                .map(player => users[player.userId].firstName)[1]} answered: <span className='phraseDisplay'> {this.props.game.answer}</span></p>
+              <p>{game.winner} answered: <span className='phraseDisplay'> {this.props.game.answer}</span></p>
             </div>
           }
 
@@ -118,23 +136,16 @@ class GameDetails extends PureComponent {
             </div>
           }
 
-          {
-            game.status === 'pending' &&
-            game.players.map(p => p.userId).indexOf(userId) === -1 &&
-            <Button
-              onClick={this.joinGame}
-              style={{ backgroundColor: '#339966' }}>
-              Join this drawbsurd</Button>
-          }
         </Paper>
+
         <div>
           {
-            game.status !== 'pending' && game.status !== 'finished' && player.turn === game.turn &&
+            game.status !== 'pending' && game.status !== 'finished' && player && player.turn === game.turn &&
             <CanvasToDraw gameId={this.props.match.params.id} />
           }
 
           {
-            game.status !== 'pending' && game.status !== 'finished' && player.turn !== game.turn &&
+            game.status !== 'pending' && game.status !== 'finished' && player && player.turn !== game.turn &&
             <CanvasToDisplay gameId={this.props.match.params.id} canvasDisplay={game.canvas} />
           }
 
@@ -146,22 +157,19 @@ class GameDetails extends PureComponent {
             </div>
           }
         </div>
-
-
-
-      </div>)
+        </div>)
   }
 }
 
 const mapStateToProps = (state, props) => ({
-  authenticated: state.currentUser !== null,
-  userId: state.currentUser && userId(state.currentUser.jwt),
-  game: state.games && state.games[props.match.params.id],
-  users: state.users
-})
-
+          authenticated: state.currentUser !== null,
+        userId: state.currentUser && userId(state.currentUser.jwt),
+        game: state.games && state.games[props.match.params.id],
+        users: state.users
+      })
+      
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGameData, changeStatus
-}
-
+          getGames, getUsers, joinGame, updateGameData, changeStatus
+      }
+      
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
