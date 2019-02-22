@@ -52,8 +52,6 @@ export const joinGame = (gameId) => (dispatch, getState) => {
     .set('Authorization', `Bearer ${jwt}`)
     .then(_ => dispatch(joinGameSuccess()))
     .catch(err => console.error(err))
-    
-  // setTimeout(()=> dispatch(changeStatus(gameId, 'Nobody')), 10000)
 }
 
 export const createGame = () => (dispatch, getState) => {
