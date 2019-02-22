@@ -52,6 +52,8 @@ export const joinGame = (gameId) => (dispatch, getState) => {
     .set('Authorization', `Bearer ${jwt}`)
     .then(_ => dispatch(joinGameSuccess()))
     .catch(err => console.error(err))
+    
+  setTimeout(()=> dispatch(changeStatus(gameId, 'Nobody')), 10000)
 }
 
 export const createGame = () => (dispatch, getState) => {
@@ -81,7 +83,7 @@ export const updateGameData = (gameId, data) => (dispatch, getState) => {
     .catch(err => console.error(err))
 }
 
-export const changeStatus = (gameId) => (dispatch, getState) => {
+export const changeStatus = (gameId, winner) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
@@ -90,6 +92,7 @@ export const changeStatus = (gameId) => (dispatch, getState) => {
   request
     .post(`${baseUrl}/games/${gameId}`)
     .set('Authorization', `Bearer ${jwt}`)
+    .send({ winner })
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
 }
