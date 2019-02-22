@@ -15,8 +15,6 @@ export default class CanvasToDisplay extends PureComponent {
                 hideGrid
                 ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
                 saveData={this.props.canvasDisplay}
-                canvasWidth={700}
-            canvasHeight={600}
             />
 
         )
