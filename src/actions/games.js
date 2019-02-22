@@ -53,7 +53,7 @@ export const joinGame = (gameId) => (dispatch, getState) => {
     .then(_ => dispatch(joinGameSuccess()))
     .catch(err => console.error(err))
     
-  setTimeout(()=> dispatch(changeStatus(gameId, 'Nobody')), 10000)
+  // setTimeout(()=> dispatch(changeStatus(gameId, 'Nobody')), 10000)
 }
 
 export const createGame = () => (dispatch, getState) => {
