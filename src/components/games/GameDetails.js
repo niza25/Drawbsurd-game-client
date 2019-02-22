@@ -10,9 +10,6 @@ import CanvasToDraw from './CanvasToDraw'
 import CanvasToDisplay from './CanvasToDisplay'
 import Input from './Input'
 import Button from '@material-ui/core/Button'
-// import Countdown from 'react-countdown-now'
-
-// const Completionist = () => <p style={{ color: 'red' }}>Your time is up!</p>
 
 class GameDetails extends PureComponent {
 
@@ -107,11 +104,6 @@ class GameDetails extends PureComponent {
             <div>
               <p>Draw:<span className='phraseDisplay'> {game.phrase}</span></p>
               <p>Your opponent guesses: <span id='answerDisplay'>{game.answer}</span></p>
-              {/* <div style={{ margin: '0 auto', fontSize: '1.5em' }}>
-                <Countdown date={Date.now() + 9000}>
-                  <Completionist />
-                </Countdown>
-              </div> */}
             </div>
           }
 
