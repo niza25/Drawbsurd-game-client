@@ -1,7 +1,7 @@
 
 # Drawbsurd - the drawing game :art:
 ## [Check out the deployed version here!](https://drawbsurd-fun.netlify.com/)
-![](drawbsurd.gif)
+![](drawbsurd.gif.sb-d59c735d-aCvtJz)
 
 ## What this project is about
 
