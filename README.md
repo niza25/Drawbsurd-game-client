@@ -1,6 +1,8 @@
 
 # Drawbsurd - the drawing game :art:
 ## [Check out the deployed version here!](https://drawbsurd-fun.netlify.com/)
+![](drawbsurd.gif)
+
 ## What this project is about
 
 This was a group project from the Codaisseur Academy using Socket.io, React, Redux.
@@ -17,9 +19,9 @@ This was a group project from the Codaisseur Academy using Socket.io, React, Red
 
 #### Click links to view some samples in this project 👇
 
-- **[react](./src/containers/Game.js)**  
-- **[redux](./src/reducers/question.js)**  
-- **[redux-thunk](./src/actions/api.js)**  
+- **[react](./src/components/games/GameDetails.js)**  
+- **[redux](./src/reducers/games.js)**  
+- **[redux-thunk](./src/actions/games.js)**  
 
 ## Goals for this project:
 
