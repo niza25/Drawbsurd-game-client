@@ -8,13 +8,6 @@
 This was a group project from the Codaisseur Academy using Socket.io, React, Redux.
 **[Goals for this project](#goals-for-this-project)**
 
-## Table of contents:
-
-- **[Technologies used](#technologies-used)**
-- **[Goals for this project](#goals-for-this-project)**
-- **[My git workflow](#my-git-workflow)**
-- **[create-react-app-docs](#create-react-app)**
-
 ## Technologies used
 
 #### Click links to view some samples in this project 👇
@@ -27,6 +20,7 @@ This was a group project from the Codaisseur Academy using Socket.io, React, Red
 
 - To practice websockets - in this case Socket.io
 - To create something fun
+- To practice working on a project in a team
 - **[To showcase disciplined git usage](#my-git-workflow)**
 
 
