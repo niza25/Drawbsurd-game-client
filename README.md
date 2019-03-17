@@ -1,9 +1,9 @@
 
-# :art: Drawbsurd - the drawing game :art:
-## [Check out the deployed version here!](https://drawbsurd.netlify.com/)
+# Drawbsurd - the drawing game :art:
+## [Check out the deployed version here!](https://drawbsurd-fun.netlify.com/)
 ## What this project is about
 
-This was a group project using Socket.io
+This was a group project from the Codaisseur Academy using Socket.io, React, Redux.
 **[Goals for this project](#goals-for-this-project)**
 
 ## Table of contents:
@@ -15,7 +15,7 @@ This was a group project using Socket.io
 
 ## Technologies used
 
-#### 👀👇 Click links to view some samples in this project 👇👀
+#### Click links to view some samples in this project 👇
 
 - **[react](./src/containers/Game.js)**  
 - **[redux](./src/reducers/question.js)**  
@@ -23,8 +23,8 @@ This was a group project using Socket.io
 
 ## Goals for this project:
 
-- To practice for myself
-- To make an example for the students to see how they could have tackled the project.
+- To practice websockets - in this case Socket.io
+- To create something fun
 - **[To showcase disciplined git usage](#my-git-workflow)**
 
 
@@ -37,12 +37,6 @@ In this project I try to use:
 - Pull requests with summaries
 
 If you have feedback to improve my git usage: **[please drop me a line!](https://www.linkedin.com/in/izabelanow/)** 
-
-## Create React App
-
-This project was scaffolded using the create-react-app cli. 
-
-**[The standard create-react-app docs can be found in here](./create-react-app-docs.md)**
 
 
 
